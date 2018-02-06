@@ -1,0 +1,4 @@
+"0","plot_and_find_the_mode(sim$Beta.0, obj = 'Beta.0')
+"
+"2","Error in sim$Beta.0 : $ operator is invalid for atomic vectors
+"

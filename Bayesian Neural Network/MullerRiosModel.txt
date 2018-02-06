@@ -1,0 +1,31 @@
+model{
+	for(i in 1:N){
+		for(j in 1:K){
+			Z[ j ,i ] <- inprod(X[ i , ] , Gamma[ j , ])
+			Z.np[ j ,i ] <-  (exp(Z[ j ,i]) - exp(-Z[ j ,i]) ) / (exp(Z[ j ,i]) + exp(- Z[ j , i]) )
+		}
+		mu[ i ] <-  Beta.0 +  inprod(Z.np[ ,i] , Beta[ ])
+		y[ i ] ~ dnorm(mu[ i ], tau)
+		Y.rep[i] ~ dnorm(mu[ i ], tau)
+		p.log[i] <- - (y[i] - mu[i] )^2*tau /2  - 1/2*log(1/tau)
+	}
+	deviance <- -2*sum(p.log[1:N])
+	# priors for betas
+	Beta.0 ~ dnorm(mu.beta, tau.beta)
+	for(j in 1:K){
+		Beta[j] ~ dnorm( mu.beta, tau.beta)
+	}
+	
+	# priors for gammas
+	for(j in 1:K){
+		Gamma[j, 1:R] ~ dmnorm(mu.gamma[ ] , tau.gamma[ , ])
+	}
+	
+	# priors for hiperparameters
+	tau ~ dgamma( alpha.tau, beta.tau)
+	mu.beta ~ dnorm(a.beta, A.beta)
+	mu.gamma[ 1:R ] ~ dmnorm(a.gamma[], A.gamma[ , ]) # is R dimentional same of cavariates
+	tau.beta ~ dgamma(alpha.beta, beta.beta)
+	tau.gamma[1:R, 1:R] ~ dwish( scale[ , ], df)
+}
+

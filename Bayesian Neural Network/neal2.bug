@@ -1,0 +1,46 @@
+model{
+	for(i in 1:N){
+		for(j in 1:K){
+			Z[ j ,i] <- Gamma.0[ j ] +  inprod(X[ i , ] , Gamma[ j , ])
+			Z.np[ j ,i] <-  1 / (1 + exp(- Z[ j ,i]) )
+		}
+		mu[ i ] <-  Beta.0 +  inprod(Z.np[ ,i] , Beta[ ])
+		y[ i ] ~ dnorm(mu[ i ], tau)
+		Y.rep[ i ] ~ dnorm(mu[ i ], tau)
+		p.log[i] <- - (y[i] - mu[i] )^2*tau /2  - 1/2*log(1/tau)
+	}
+	# priors for precisions
+	tau ~ dgamma( alpha, beta)
+	tau.out ~ dgamma( alpha.o , beta.o)
+	tau.in ~ dgamma( alpha.o , beta.o)
+	tau.bo ~ dgamma( alpha.b , beta.b)
+	tau.bin ~ dgamma( alpha.b , beta.b)
+	tau.ao ~ dgamma( alpha.a, beta.a)
+	beta.out.1 <- alpha.out.1 /  sqrt(tau.out)
+	for( j in 1:K){
+		tau.a[ j ] ~ dgamma( alpha.a, beta.a)
+		tau.out.vector[ j ] ~ dgamma( alpha.out.1, beta.out.1)
+	}
+	beta.in.1 <- alpha.in.1/ sqrt(tau.in)
+	for(h in 1:R){
+		tau.in.vector[h] ~ dgamma(alpha.in.1 , beta.in.1)
+	}
+	
+	# priors for Gammas
+	for(j in 1:K){
+		tau.gamma.0[ j ] <- sqrt(tau.bin * tau.a[ j ])
+		Gamma.0[ j ] ~ dnorm( 0, tau.gamma.0[ j ] )
+		for( h in 1:R){
+			tau.gamma[ j, h ] <- sqrt(tau.in.vector[ h ] * tau.a[ j ])
+			Gamma[ j, h ] ~ dnorm(0 , tau.gamma[ j, h ] )
+		}
+	}
+	
+	# priors for Betas
+	tau.beta.0 <- sqrt( tau.bo * tau.ao)
+	Beta.0 ~ dnorm(0, tau.beta.0)
+	for(j in 1:K){
+		tau.beta[ j ] <- sqrt(tau.out.vector[ j ]*tau.ao)
+		Beta[ j ] ~ dnorm(0, tau.beta[ j ])
+	}
+}

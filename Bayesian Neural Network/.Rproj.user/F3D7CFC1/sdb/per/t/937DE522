@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "\n\n# Importing chain from WinBugs --------------------------------------------\nM = 10000\n\nindex <- read.csv(file = \"chain winbugs/muller_rois_index.txt\", sep = '\\t', header = F)\nc <- dim(index)[1]\n\nobj <- read.csv(file = \"chain winbugs/muller_rois_chain.txt\", sep = '\\t', header = F)\n\nchain_muller_Rios <- matrix(obj[,2], c(M,c))\n\nindex[2,1]\n\nl=4\nindex[l,1]\nmean(chain_muller_Rios[,l])\n\nts.plot(chain_muller_Rios[,l])\n\nprediction_BNN_for_MR <- function(X, chain = chain_muller_Rios){\n  \n}\n\n\n\n",
+    "created" : 1506084218863.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "4238550417",
+    "id" : "937DE522",
+    "lastKnownWriteTime" : 1506607823,
+    "last_content_update" : 1506607823,
+    "path" : "C:/Users/Umbertojunior/Desktop/data science/Second Semestr/SDS 2/project/Bayesian Neural Network/import_chain_from_winbugs.R",
+    "project_path" : "import_chain_from_winbugs.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

@@ -1,0 +1,2 @@
+
+$$\int L_n P_n = \int_{\Omega_n} f(\mathbf{\beta}| \mathbf{\gamma},\sigma, \mathbf{y})\pi(\mathbf{\beta}|\mathbf{\gamma},\sigma) f(\sigma|\mathbf{\gamma}, \mathbf{y})\pi(\sigma|\mathbf{\gamma})f(\mathbf{\gamma}|\mathbf{y}) I_{\gamma \in \Gamma_n} d\beta d \gamma d\sigma  $$

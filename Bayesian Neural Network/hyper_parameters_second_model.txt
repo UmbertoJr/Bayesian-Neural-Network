@@ -1,0 +1,10 @@
+structure(list(a.beta = 0, A.beta = 1, a.gamma = c(0, 0, 0, 0, 
+0, 0), A.gamma = structure(c(1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 
+0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 
+0, 0, 0, 1), .Dim = c(6L, 6L)), alpha.beta = 0.5, beta.beta = 0.5, 
+    df = 7, scale = structure(c(1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 
+    0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 
+    0, 0, 0, 0, 0, 0, 1), .Dim = c(6L, 6L)), alpha.tau = 0.5, 
+    beta.tau = 0.05), .Names = c("a.beta", "A.beta", "a.gamma", 
+"A.gamma", "alpha.beta", "beta.beta", "df", "scale", "alpha.tau", 
+"beta.tau"))
